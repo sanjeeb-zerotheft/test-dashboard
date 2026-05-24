@@ -1,0 +1,23 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "bundler",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2017",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@zerotheft/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@zerotheft/shared-ui/*": ["libs/shared-ui/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

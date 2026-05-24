@@ -1,0 +1,30 @@
+{
+  "name": "saas-control-dashboard",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/saas-control-dashboard/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "apps/saas-control-dashboard/.next"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/saas-control-dashboard/.next"
+        },
+        "production": {}
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx next dev"],
+        "cwd": "apps/saas-control-dashboard"
+      }
+    }
+  }
+}

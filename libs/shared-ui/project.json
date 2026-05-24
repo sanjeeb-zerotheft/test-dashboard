@@ -1,0 +1,15 @@
+{
+  "name": "shared-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-ui/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:ui"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'shared-ui is a TypeScript library - no build step required'"
+      }
+    }
+  }
+}
