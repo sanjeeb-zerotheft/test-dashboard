@@ -1,0 +1,30 @@
+{
+  "name": "user-dashboard",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/user-dashboard/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "apps/user-dashboard/.next"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/user-dashboard/.next"
+        },
+        "production": {}
+      }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx next dev"],
+        "cwd": "apps/user-dashboard"
+      }
+    }
+  }
+}

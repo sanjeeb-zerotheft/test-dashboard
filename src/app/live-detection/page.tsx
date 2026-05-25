@@ -1,9 +1,9 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@zerotheft/shared-ui";
+import { Badge } from "@zerotheft/shared-ui";
+import { Switch } from "@zerotheft/shared-ui";
+import { Button } from "@zerotheft/shared-ui";
 import { RefreshCw } from "lucide-react";
 import { useState } from "react";
 

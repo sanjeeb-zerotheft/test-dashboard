@@ -1,9 +1,9 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@zerotheft/shared-ui";
+import { Badge } from "@zerotheft/shared-ui";
+import { Button } from "@zerotheft/shared-ui";
+import { Input } from "@zerotheft/shared-ui";
 import {
   Lock,
   Megaphone,

@@ -1,9 +1,9 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardHeader, CardTitle } from "@zerotheft/shared-ui";
+import { Badge } from "@zerotheft/shared-ui";
+import { Button } from "@zerotheft/shared-ui";
+import { Progress } from "@zerotheft/shared-ui";
 import { Camera, Wifi, HardDrive, AlertTriangle, CheckCircle2 } from "lucide-react";
 
 const cameras = [

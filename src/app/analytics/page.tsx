@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@zerotheft/shared-ui";
+import { Badge } from "@zerotheft/shared-ui";
+import { Button } from "@zerotheft/shared-ui";
 import {
   BarChart,
   Bar,
@@ -57,7 +57,7 @@ const stats = [
 
 function TrendIcon({ trend }: { trend: string }) {
   if (trend === "up") return <TrendingUp className="w-3 h-3 text-emerald-500" />;
-  if (trend === "down") return <TrendingDown className="w-3 h-3 text-emerald-500" />;
+  if (trend === "down") return <TrendingDown className="w-3 h-3 text-red-500" />;
   return <Minus className="w-3 h-3 text-gray-400" />;
 }
 
@@ -84,7 +84,7 @@ export default function AnalyticsPage() {
               <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
               <div className="flex items-center gap-1 mt-1">
                 <TrendIcon trend={stat.trend} />
-                <span className={`text-xs font-medium ${stat.change.startsWith("+") ? "text-emerald-500" : "text-emerald-500"}`}>
+                <span className={`text-xs font-medium ${stat.change.startsWith("+") ? "text-emerald-500" : "text-red-500"}`}>
                   {stat.change}
                 </span>
               </div>

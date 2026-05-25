@@ -1,25 +1,25 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@zerotheft/shared-ui";
+import { Badge } from "@zerotheft/shared-ui";
+import { Button } from "@zerotheft/shared-ui";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+} from "@zerotheft/shared-ui";
+import { Input } from "@zerotheft/shared-ui";
+import { Label } from "@zerotheft/shared-ui";
+import { Textarea } from "@zerotheft/shared-ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@zerotheft/shared-ui";
 import { FileText, Plus, Calendar, MapPin, User, Eye } from "lucide-react";
 
 const incidents = [
