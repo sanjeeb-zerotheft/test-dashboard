@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ZeroTheft - Super Admin Portal",
-  description: "Super admin control dashboard for ZeroTheft platform",
+  title: "ZeroTheft - Passive Dashboard",
+  description: "User passive security monitoring dashboard",
 };
 
 export default function RootLayout({

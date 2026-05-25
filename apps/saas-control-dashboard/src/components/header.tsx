@@ -1,10 +1,16 @@
 "use client";
 
-import { Bell } from "lucide-react";
+import { Bell, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Header() {
+export default function Header({
+  sidebarExpanded,
+  onToggle,
+}: {
+  sidebarExpanded: boolean;
+  onToggle?: () => void;
+}) {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
 
@@ -17,8 +23,23 @@ export default function Header() {
   });
 
   return (
-    <header className="fixed top-0 left-0 right-0 lg:left-64 z-30 bg-[#1e2330] border-b border-gray-700/50 h-16 flex items-center justify-between px-6">
-      <nav className="flex items-center gap-2 text-sm">
+    <header
+      className={`fixed top-0 right-0 z-30 bg-[#1e2330] border-b border-gray-700/50 h-16 flex items-center justify-between px-6 transition-all duration-300 ${
+        sidebarExpanded ? "left-64" : "left-16"
+      }`}
+    >
+      <nav className="flex items-center gap-3 text-sm">
+        <button
+          onClick={onToggle}
+          className="w-8 h-8 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors flex items-center justify-center shrink-0"
+          title={sidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
+        >
+          {sidebarExpanded ? (
+            <PanelLeftClose className="w-4 h-4" />
+          ) : (
+            <PanelLeftOpen className="w-4 h-4" />
+          )}
+        </button>
         <Link href="/" className="text-gray-400 hover:text-white transition-colors">
           Home
         </Link>

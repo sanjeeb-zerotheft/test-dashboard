@@ -64,29 +64,3 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
 }
-
-/* Range slider custom styling */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 6px;
-  border-radius: 3px;
-  background: #e5e7eb;
-  outline: none;
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #ff6b47;
-  cursor: pointer;
-}
-input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #ff6b47;
-  cursor: pointer;
-}

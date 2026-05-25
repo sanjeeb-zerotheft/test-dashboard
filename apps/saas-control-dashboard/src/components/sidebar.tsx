@@ -28,7 +28,6 @@ import {
   AlertTriangle,
   ChevronDown,
   Menu,
-  X,
 } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@zerotheft/shared-ui";
@@ -75,12 +74,17 @@ const navItems: NavItem[] = [
   { name: "Incidents", href: "/incidents", icon: AlertTriangle },
 ];
 
-function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
+export default function Sidebar({
+  expanded,
+}: {
+  expanded: boolean;
+}) {
   const pathname = usePathname();
-  const [expanded, setExpanded] = useState<string[]>(["User & Tenant"]);
+  const [open, setOpen] = useState(false);
+  const [expandedMenus, setExpandedMenus] = useState<string[]>(["User & Tenant"]);
 
   const toggleExpand = (name: string) => {
-    setExpanded((prev) =>
+    setExpandedMenus((prev) =>
       prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]
     );
   };
@@ -93,30 +97,49 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
     return false;
   };
 
-  return (
-    <div className="flex flex-col h-full bg-[#1e2330] text-gray-300 w-64">
-      <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-700/50">
-        <div className="w-8 h-8 bg-[#ff6b47] rounded-lg flex items-center justify-center">
+  const SidebarContent = ({
+    onNavigate,
+    isExpanded,
+  }: {
+    onNavigate?: () => void;
+    isExpanded: boolean;
+  }) => (
+    <div
+      className={`flex flex-col h-full bg-[#1e2330] text-gray-300 transition-all duration-300 ${
+        isExpanded ? "w-64" : "w-16"
+      }`}
+    >
+      {/* Logo */}
+      <div
+        className={`flex items-center border-b border-gray-700/50 transition-all duration-300 ${
+          isExpanded ? "px-6 py-5 gap-3" : "justify-center py-5"
+        }`}
+      >
+        <div className="w-8 h-8 bg-[#ff6b47] rounded-lg flex items-center justify-center shrink-0">
           <Shield className="w-5 h-5 text-white" />
         </div>
-        <div>
-          <span className="text-lg font-bold text-white tracking-tight">ZeroTheft</span>
-          <p className="text-[10px] text-gray-500 -mt-0.5">Super Admin Portal</p>
-        </div>
+        {isExpanded && (
+          <div>
+            <span className="text-lg font-bold text-white tracking-tight whitespace-nowrap block">
+              ZeroTheft
+            </span>
+            <p className="text-[10px] text-gray-500 -mt-0.5">Super Admin Portal</p>
+          </div>
+        )}
       </div>
 
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 py-4 space-y-1 overflow-y-auto overflow-x-hidden no-scrollbar">
         {navItems.map((item) => {
           const hasChildren = !!item.children;
           const active = isActive(item.href) || isParentActive(item);
-          const isExpanded = expanded.includes(item.name);
+          const menuOpen = isExpanded && expandedMenus.includes(item.name);
 
-          if (hasChildren) {
+          if (hasChildren && isExpanded) {
             return (
               <div key={item.name}>
                 <button
                   onClick={() => toggleExpand(item.name)}
-                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors mx-3 ${
                     active
                       ? "text-[#ff6b47]"
                       : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -127,17 +150,17 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
                     {item.name}
                   </div>
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 transition-transform ${menuOpen ? "rotate-180" : ""}`}
                   />
                 </button>
-                {isExpanded && item.children && (
+                {menuOpen && item.children && (
                   <div className="ml-4 mt-1 space-y-1">
                     {item.children.map((child) => (
                       <Link
                         key={child.name}
                         href={child.href}
                         onClick={onNavigate}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors mx-3 ${
                           isActive(child.href)
                             ? "bg-[#ff6b47]/10 text-[#ff6b47]"
                             : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -157,30 +180,36 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
               key={item.name}
               href={item.href}
               onClick={onNavigate}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex items-center transition-colors relative ${
+                isExpanded
+                  ? "px-3 py-2.5 gap-3 mx-3 rounded-lg text-sm font-medium"
+                  : "flex-col items-center justify-center py-3 px-2"
+              } ${
                 active
                   ? "bg-[#ff6b47]/10 text-[#ff6b47]"
                   : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
+              title={item.name}
             >
-              <item.icon className={`w-5 h-5 ${active ? "text-[#ff6b47]" : ""}`} />
-              {item.name}
+              <item.icon
+                className={`w-5 h-5 shrink-0 ${active ? "text-[#ff6b47]" : ""}`}
+              />
+              {isExpanded && (
+                <span className="whitespace-nowrap flex-1">{item.name}</span>
+              )}
             </Link>
           );
         })}
       </nav>
+
     </div>
   );
-}
-
-export default function Sidebar() {
-  const [open, setOpen] = useState(false);
 
   return (
     <>
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex fixed left-0 top-0 h-screen z-40">
-        <SidebarContent />
+        <SidebarContent isExpanded={expanded} />
       </aside>
 
       {/* Mobile Header */}
@@ -196,7 +225,7 @@ export default function Sidebar() {
             <Menu className="w-6 h-6" />
           </SheetTrigger>
           <SheetContent side="left" className="p-0 bg-[#1e2330] border-r-0 w-64">
-            <SidebarContent onNavigate={() => setOpen(false)} />
+            <SidebarContent onNavigate={() => setOpen(false)} isExpanded />
           </SheetContent>
         </Sheet>
       </div>
